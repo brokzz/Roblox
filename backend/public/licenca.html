@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblax Vault • Licença</title>
+
+  <style>
+    :root{
+      --bg:#f3f6fb;
+      --text:#0b1220;
+      --muted:#6b7a90;
+      --line:#e6edf7;
+      --blue1:#2c67ff;
+      --blue2:#6cb2ff;
+      --shadow: 0 16px 40px rgba(15,23,42,.10);
+      --shadow2: 0 10px 24px rgba(15,23,42,.08);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .app{
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 24px;
+    }
+
+    /* Topbar igual ao index */
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      background: rgba(243,246,251,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(230,237,247,.7);
+      padding: 12px 14px 10px;
+    }
+    .topbar-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .icon-btn{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 8px 18px rgba(15,23,42,.06);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 900;
+    }
+    .brand .logo{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      overflow: hidden;
+      background:#fff;
+      box-shadow: 0 14px 26px rgba(44,103,255,.22);
+      display:grid;
+      place-items:center;
+    }
+    .brand .logo img{
+      width: 140%;
+      height: 140%;
+      object-fit: contain;
+      display:block;
+    }
+    .brand .name{
+      display:flex;
+      flex-direction:column;
+      line-height: 1.0;
+      align-items:center;
+      gap:2px;
+    }
+    .brand .name small{
+      font-size: 12px;
+      color:#24324a;
+      font-weight: 900;
+      opacity:.95;
+    }
+    .brand .name strong{
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing:.2px;
+    }
+
+    .content{
+      padding: 18px 14px 26px;
+    }
+
+    /* “Voltar” */
+    .back{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#334155;
+      font-weight: 900;
+      text-decoration:none;
+      margin: 8px 2px 16px;
+      width: fit-content;
+    }
+    .back svg{ width:18px; height:18px; }
+
+    /* Card central */
+    .license-card{
+      margin-top: 10px;
+      background: #f6f3ea;
+      border: 1px solid rgba(15,23,42,.06);
+      border-radius: 22px;
+      box-shadow: var(--shadow2);
+      padding: 22px 18px 20px;
+      text-align:center;
+    }
+
+    .warn{
+      width: 74px;
+      height: 74px;
+      border-radius: 999px;
+      background: #f2e6cf;
+      margin: 0 auto 14px;
+      display:grid;
+      place-items:center;
+    }
+    .warn .dot{
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 3px solid #f59e0b;
+      display:grid;
+      place-items:center;
+      color:#f59e0b;
+      font-weight: 1000;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .license-card h2{
+      margin: 8px 0 10px;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+
+    .license-card p{
+      margin: 0 auto 18px;
+      max-width: 290px;
+      color:#6b7280;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .btn-primary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      color:#fff;
+      border: 0;
+      font-weight: 1000;
+      cursor:pointer;
+      box-shadow: 0 16px 30px rgba(44,103,255,.18);
+      text-decoration:none;
+    }
+    .btn-primary:active{ transform: translateY(1px); }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-row">
+        <button class="icon-btn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" stroke="#0b1220" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="brand" aria-label="Logo">
+          <div class="logo">
+            <img src="assets/imgrb.png" alt="Roblax Vault">
+          </div>
+          <div class="name">
+            <small>Roblax</small>
+            <strong>Vault</strong>
+          </div>
+        </div>
+
+        <button class="icon-btn" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#0b1220" stroke-width="2"/>
+            <path d="M16.5 16.5 21 21" stroke="#0b1220" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <a class="back" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Voltar
+      </a>
+
+      <section class="license-card" aria-label="Licença necessária">
+        <div class="warn" aria-hidden="true">
+          <div class="dot">!</div>
+        </div>
+
+        <h2>Licença Necessária</h2>
+        <p>Para realizar saques, você precisa ter uma licença de vendedor ativa na plataforma.</p>
+
+       <a class="btn-primary" href="./seller-pass.html">
+  Adquirir Licença
+</a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Roblax Vault • Loja</title>
+
+  <link rel="stylesheet" href="assets/store.css"/>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-row">
+        <button class="icon-btn" id="btnMenu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" stroke="#0b1220" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="brand" aria-label="Logo">
+          <div class="logo">
+            <img src="assets/imgrb.png" alt="Roblax Vault"/>
+          </div>
+          <div class="name">
+            <small>Roblax</small>
+            <strong>Vault</strong>
+          </div>
+        </div>
+
+        <button class="icon-btn" id="btnChat" aria-label="Chat">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 14a4 4 0 0 1-4 4H9l-4 3v-3H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v7Z"
+              stroke="#0b1220" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="content">
+      <span class="pill">🌀 LOJA OFICIAL</span>
+
+      <h1 class="h1">Explore Itens Raros</h1>
+      <p class="sub">Atualize seu avatar com os melhores itens da comunidade.</p>
+
+      <!-- saldo -->
+      <div class="saldo-card">
+        <div>
+          <div class="saldo-title">Seu Saldo Disponível</div>
+          <div class="saldo-value">
+            <span id="storeSaldo">0</span>
+            <small>Robux</small>
+          </div>
+        </div>
+        <div class="saldo-badge" title="Saldo">↗</div>
+      </div>
+
+      <!-- busca -->
+      <div class="searchbox">
+        <span class="search-ico" aria-hidden="true">🔎</span>
+        <input id="storeSearch" type="text" placeholder="Busque por nome, criador ou tipo..."/>
+      </div>
+
+      <!-- filtros -->
+      <div class="filters">
+        <div class="filters-title">Faixa de Preço:</div>
+        <div class="filters-row">
+          <input id="minPrice" type="number" inputmode="numeric" placeholder="Min"/>
+          <span class="dash">–</span>
+          <input id="maxPrice" type="number" inputmode="numeric" placeholder="Max"/>
+        </div>
+        <button class="filter-btn" id="btnApplyFilters" type="button">Filtrar</button>
+      </div>
+
+      <!-- chips -->
+      <div class="chips" role="tablist" aria-label="Categorias">
+        <button class="chip active" data-cat="all" type="button">Todos</button>
+        <button class="chip" data-cat="limited" type="button">Limitados</button>
+        <button class="chip" data-cat="roupas" type="button">Roupas</button>
+        <button class="chip" data-cat="acessorios" type="button">Acessórios</button>
+      </div>
+
+      <!-- grid -->
+      <div class="store-grid" id="storeGrid"></div>
+
+      <div class="store-more">
+        <button class="filter-btn" id="btnLoadMore" type="button">Carregar Mais Itens</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- BOTTOM NAV (agora com links reais) -->
+  <nav class="bottom" aria-label="Navegação inferior">
+    <a class="navlink" href="index.html" title="Início">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9.5Z"
+          stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      Início
+    </a>
+
+    <a class="navlink active" href="loFechado, Marcos. Vamos fazer **`loja.html` separado** + **Loja completa** (filtros, categorias, grid, “Carregar mais”, e **modal “Confirmar Compra”** igual sua imagem). Vou te passar **passo a passo** e no final você terá:
+
+✅ `public/loja.html` (página da loja)  
+✅ `public/assets/store.css` (estilo da loja + modal)  
+✅ `public/assets/store.js` (dados dos itens + filtros + compra + persistência)  
+✅ `index.html` ajustado para o botão “Loja” abrir `loja.html`  
+✅ Saldo e compras persistidos no `localStorage` (vale em todas páginas)
+
+> **Importante:** não vamos mexer em `node_modules`. Tudo só dentro de `public/`.
+
+---
+
+# 0) Estrutura final (como deve ficar)
+Dentro do seu projeto (normalmente `backend/public`):

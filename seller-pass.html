@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblax Vault • Seller Pass</title>
+
+  <style>
+    :root{
+      --bg:#f3f6fb;
+      --text:#0b1220;
+      --muted:#6b7a90;
+      --line:#e6edf7;
+      --shadow: 0 16px 40px rgba(15,23,42,.10);
+      --shadow2: 0 10px 24px rgba(15,23,42,.08);
+
+      --dark1:#0f172a;
+      --dark2:#111827;
+
+      --orange1:#f59e0b;
+      --orange2:#f97316;
+      --pill:#111827;
+      --blue1:#2c67ff;
+      --blue2:#6cb2ff;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .app{
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 14px 14px 40px;
+    }
+
+    /* topo com voltar */
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:#475569;
+      font-weight: 900;
+      text-decoration:none;
+      margin: 8px 0 18px;
+    }
+    .back svg{ width:18px; height:18px; }
+
+    /* bloco central */
+    .center{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding: 6px 0 10px;
+    }
+
+    .badge{
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(15,23,42,.08);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      margin-bottom: 14px;
+    }
+    .badge img{
+      width: 120%;
+      height: 120%;
+      object-fit: contain;
+      display:block;
+    }
+
+    h1{
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-weight: 1000;
+      letter-spacing: .2px;
+    }
+
+    .sub{
+      margin: 0 0 16px;
+      max-width: 320px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    /* card escuro do preço */
+    .price-card{
+      width: 100%;
+      max-width: 340px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--dark1), var(--dark2));
+      box-shadow: var(--shadow);
+      padding: 16px 16px 14px;
+      color:#fff;
+      margin: 10px auto 16px;
+    }
+
+    .price-card .cap{
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      opacity: .75;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .price{
+      display:flex;
+      align-items:baseline;
+      justify-content:center;
+      gap: 6px;
+      margin: 0 0 10px;
+    }
+    .price .rs{ font-weight: 1000; opacity:.9; font-size: 12px; }
+    .price .num{ font-weight: 1100; font-size: 30px; letter-spacing:.2px; }
+    .price .cents{ font-weight: 1000; font-size: 12px; opacity:.9; }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      opacity: .95;
+    }
+
+    /* botão laranja */
+    .cta-wrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 8px;
+      margin: 8px 0 18px;
+      width: 100%;
+    }
+
+    .cta{
+      width: 100%;
+      max-width: 340px;
+      border:0;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 1100;
+      letter-spacing: .3px;
+      color:#fff;
+      cursor:pointer;
+      background: linear-gradient(135deg, var(--orange1), var(--orange2));
+      box-shadow: 0 18px 36px rgba(249,115,22,.20);
+    }
+    .cta:active{ transform: translateY(1px); }
+    .cta:disabled{
+      opacity: .7;
+      cursor: not-allowed;
+      filter: grayscale(.2);
+    }
+
+    .secure{
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    /* benefícios */
+    .benef{
+      margin-top: 12px;
+    }
+    .benef h2{
+      font-size: 13px;
+      margin: 0 0 12px;
+      font-weight: 1100;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .benef h2 .star{
+      color:#f59e0b;
+      font-size: 12px;
+    }
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+    .item{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow2);
+      padding: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .ic{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      background: #f8fafc;
+      border:1px solid #e5e7eb;
+      flex: 0 0 34px;
+      color:#f59e0b;
+      font-weight: 1100;
+      user-select:none;
+    }
+    .item b{
+      display:block;
+      font-size: 12px;
+      font-weight: 1100;
+      margin-bottom: 4px;
+    }
+    .item p{
+      margin:0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    /* ===== PIX BOX ===== */
+    .pixBox{
+      display:none;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto 10px;
+      background:#fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow2);
+      padding: 14px;
+      text-align: left;
+    }
+    .pixTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .pixTop strong{
+      font-size: 13px;
+      font-weight: 1100;
+    }
+    .pixStatus{
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+    .qrWrap{
+      display:grid;
+      place-items:center;
+      margin: 10px 0 12px;
+    }
+    .qrWrap img{
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background:#fff;
+    }
+    .pixLabel{
+      font-size: 12px;
+      font-weight: 1000;
+      color:#334155;
+      margin: 6px 0 8px;
+    }
+    .pixCode{
+      width:100%;
+      min-height: 96px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color:#0b1220;
+      resize: none;
+      outline: none;
+    }
+    .pixActions{
+      display:flex;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .btn{
+      flex:1;
+      border-radius: 999px;
+      padding: 12px 14px;
+      font-weight: 1100;
+      cursor:pointer;
+      border: 1px solid var(--line);
+      background:#fff;
+      color:#0b1220;
+    }
+    .btn.primary{
+      border:0;
+      color:#fff;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      box-shadow: 0 16px 30px rgba(44,103,255,.18);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- voltar -->
+    <a class="back" href="./licenca.html">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Voltar
+    </a>
+
+    <div class="center">
+      <div class="badge" aria-hidden="true">
+        <img src="./assets/sellerpass.png" alt="">
+      </div>
+
+      <h1>Roblox Seller Pass</h1>
+      <p class="sub">Sua licença oficial para converter itens em dinheiro real e lucrar com sua conta.</p>
+
+      <div class="price-card">
+        <div class="cap">Investimento Único</div>
+        <div class="price" aria-label="Preço">
+          <span class="rs">R$</span>
+          <span class="num">34</span>
+          <span class="cents">,90</span>
+        </div>
+        <div class="pill">Acesso Vitalício + Atualizações</div>
+      </div>
+
+      <div class="cta-wrap">
+        <button class="cta" type="button" id="btnComprarSellerPass">
+          ADQUIRIR SELLER PASS
+        </button>
+        <div class="secure">Pagamento seguro processado via PIX</div>
+
+        <!-- ===== PIX BOX ===== -->
+        <div class="pixBox" id="pixBox">
+          <div class="pixTop">
+            <strong>Aguardando pagamento</strong>
+            <span class="pixStatus" id="pixStatus">Status: PENDING</span>
+          </div>
+
+          <div class="qrWrap">
+            <img id="pixQrImg" alt="QR Code PIX" />
+          </div>
+
+          <div class="pixLabel">Copie e cole o código Pix</div>
+          <textarea class="pixCode" id="pixCode" readonly></textarea>
+
+          <div class="pixActions">
+            <button class="btn" type="button" id="btnCopiarPix">Copiar</button>
+            <button class="btn primary" type="button" id="btnJaPaguei">Já paguei</button>
+          </div>
+        </div>
+        <!-- ===== /PIX BOX ===== -->
+
+      </div>
+    </div>
+
+    <section class="benef">
+      <h2><span class="star">★</span> Benefícios Exclusivos</h2>
+      <div class="list">
+        <div class="item">
+          <div class="ic">↗</div>
+          <div>
+            <b>Vendas Ilimitadas</b>
+            <p>Não há limites para o quanto você pode vender. Lucre com todos os seus itens raros.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="ic">$</div>
+          <div>
+            <b>Conversão Automática</b>
+            <p>Converta Robux em BRL instantaneamente com nossa cotação atualizada.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="ic">⚡</div>
+          <div>
+            <b>Saques via PIX</b>
+            <p>Receba seu dinheiro em segundos na sua conta bancária. Rápido e seguro.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="ic">🛡</div>
+          <div>
+            <b>Garantia de Segurança</b>
+            <p>Transações 100% seguras e monitoradas para sua tranquilidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ====== Estado ======
+    let currentTransactionId = null;
+    let currentClientIdentifier = null;
+    let pollTimer = null;
+
+    const btnComprar = document.getElementById("btnComprarSellerPass");
+    const pixBox = document.getElementById("pixBox");
+    const pixStatusEl = document.getElementById("pixStatus");
+    const pixQrImg = document.getElementById("pixQrImg");
+    const pixCode = document.getElementById("pixCode");
+    const btnCopiar = document.getElementById("btnCopiarPix");
+    const btnJaPaguei = document.getElementById("btnJaPaguei");
+
+    function setStatus(s){
+      pixStatusEl.textContent = "Status: " + String(s || "PENDING").toUpperCase();
+    }
+
+    function stopPolling(){
+      if (pollTimer) clearInterval(pollTimer);
+      pollTimer = null;
+    }
+
+    async function checkStatus(){
+      if (!currentTransactionId && !currentClientIdentifier) return;
+
+      const qs = currentTransactionId
+        ? `transactionId=${encodeURIComponent(currentTransactionId)}`
+        : `clientIdentifier=${encodeURIComponent(currentClientIdentifier)}`;
+
+      const r = await fetch(`/api/pix/status?${qs}`);
+      const data = await r.json().catch(() => ({}));
+
+      if(!r.ok){
+        setStatus("ERRO");
+        return;
+      }
+
+      const status = (data.status || "PENDING").toUpperCase();
+      setStatus(status);
+
+      if(status === "COMPLETED"){
+        stopPolling();
+        // Opção A (demo): libera licença no navegador
+        localStorage.setItem("hasLicense", "1");
+        alert("Pagamento confirmado! Licença ativada.");
+        window.location.href = "./index.html";
+      }
+    }
+
+    btnComprar.addEventListener("click", async () => {
+      try{
+        btnComprar.disabled = true;
+        btnComprar.textContent = "GERANDO PIX...";
+
+        // Se você quiser mandar dados do cliente, poderia mandar no body aqui.
+        const r = await fetch("/api/pix/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}) // opcional
+        });
+
+        const data = await r.json().catch(() => ({}));
+
+        if(!r.ok){
+          const msg = (typeof data.details === "string")
+            ? data.details
+            : JSON.stringify(data.details || data.error || "Erro");
+          alert("Erro ao gerar PIX: " + msg);
+          return;
+        }
+
+        currentTransactionId = data.transactionId || null;
+        currentClientIdentifier = data.clientIdentifier || data.clientIdentifier || null;
+
+        // Mostra QR (prioridade: base64)
+        if (data.pixBase64) pixQrImg.src = data.pixBase64;      // "data:image/png;base64,..."
+        else if (data.pixImage) pixQrImg.src = data.pixImage;   // URL
+        else pixQrImg.removeAttribute("src");
+
+        // Copia e cola
+        pixCode.value = data.pixCode || "";
+
+        // Mostra box
+        pixBox.style.display = "block";
+        setStatus(data.status || "PENDING");
+
+        // Inicia polling
+        stopPolling();
+        pollTimer = setInterval(checkStatus, 3000);
+        checkStatus();
+
+      } catch(e){
+        alert("Falha: " + e.message);
+      } finally {
+        btnComprar.disabled = false;
+        btnComprar.textContent = "ADQUIRIR SELLER PASS";
+      }
+    });
+
+    btnCopiar.addEventListener("click", async () => {
+      const t = pixCode.value || "";
+      try{
+        await navigator.clipboard.writeText(t);
+        alert("Código PIX copiado!");
+      } catch {
+        pixCode.focus();
+        pixCode.select();
+        document.execCommand("copy");
+        alert("Código PIX copiado!");
+      }
+    });
+
+    btnJaPaguei.addEventListener("click", () => checkStatus());
+  </script>
+</body>
+</html>

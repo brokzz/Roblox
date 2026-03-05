@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblax Vault • Início</title>
+
+  <style>
+    :root{
+      --bg:#f3f6fb;
+      --card:#ffffff;
+      --text:#0b1220;
+      --muted:#6b7a90;
+      --line:#e6edf7;
+      --blue1:#2c67ff;
+      --blue2:#6cb2ff;
+      --shadow: 0 16px 40px rgba(15,23,42,.10);
+      --shadow2: 0 10px 24px rgba(15,23,42,.08);
+      --r18:18px;
+      --r22:22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    /* container mobile */
+    .app{
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 94px; /* espaço bottom nav */
+    }
+    /* top bar similar ao print (hamburger + título + search) */
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index: 50;
+      background: rgba(243,246,251,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(230,237,247,.7);
+      padding: 12px 14px 10px;
+    }
+    .topbar-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .icon-btn{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background:#fff;
+      box-shadow: 0 8px 18px rgba(15,23,42,.06);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .icon-btn:active{transform: translateY(1px)}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight: 900;
+    }
+    .brand .logo{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      overflow: hidden; /* recorta a imagem no arredondado */
+      background: #ffffff; /* fundo caso o logo tenha transparência */
+      border: 1px solid rgba(255,255,255,.0);
+      box-shadow: 0 14px 26px rgba(44,103,255,.28);
+      display: grid;
+      place-items: center;
+    }
+    .brand .logo img{
+      width: 140%;
+      height: 140%;
+      object-fit: contain; /* mantém a logo inteira sem cortar */
+      display: block;
+    }
+    .brand .name{
+      display:flex;
+      flex-direction:column;
+      line-height: 1.0;
+      align-items:center;
+      gap:2px;
+    }
+    .brand .name small{
+      font-size: 12px;
+      color:#24324a;
+      font-weight: 900;
+      opacity:.95;
+    }
+    .brand .name strong{
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing:.2px;
+    }
+
+    /* page padding */
+    .content{ padding: 14px 14px 26px; }
+
+    /* ===== HERO (igual ao print) ===== */
+    .hero{
+      position: relative;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      box-shadow: 0 22px 42px rgba(44,103,255,.26);
+      overflow: hidden;
+      padding: 14px;
+      color:#fff;
+    }
+    /* textura leve (opcional) */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity:.18;
+      pointer-events:none;
+    }
+    /* boneco sobreposto */
+    .hero-boneco{
+      position: absolute;
+      left: -18px;
+      bottom: 1px; /* “altura do chão” */
+      top: auto;
+      height: 200px;
+      width: auto !important;
+      max-width: none;
+      z-index: 2;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 14px 20px rgba(0,0,0,.18));
+    }
+    /* conteúdo empurrado pra direita */
+    .hero-inner{
+      position: relative;
+      z-index: 3;
+      padding-left: 130px;
+    }
+    .hero-top{
+      display:flex;
+      justify-content:flex-end;
+    }
+    .hero-title{
+      text-align:right;
+      padding-top: 10px;
+    }
+    .vault{
+      font-weight: 1000;
+      font-size: 16px;
+      margin-bottom: 6px;
+      opacity:.95;
+    }
+    .hero-title small{
+      display:block;
+      font-weight: 800;
+      opacity:.92;
+      margin-bottom: 4px;
+    }
+    .hero-title strong{
+      display:block;
+      font-weight: 1000;
+      font-size: 18px;
+      letter-spacing:.3px;
+    }
+
+    .hero-grid{
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+    .hero-grid > .mini{
+      min-width: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .mini{
+      background: rgba(255,255,255,.95);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 12px 12px 14px;
+      box-shadow: 0 12px 22px rgba(15,23,42,.10);
+      border: 1px solid rgba(230,237,247,.85);
+    }
+    .mini-head{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 32px;
+      margin-bottom: 10px;
+    }
+    .mini-label{
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .mini .value{
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 1000;
+    }
+    .mini-icon{
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+    }
+    .mini-icon--blue{
+      background: rgba(44,103,255,.14);
+      border: 1px solid rgba(44,103,255,.22);
+      color: var(--blue1);
+    }
+    .mini-icon--green{
+      background: rgba(34,197,94,.14);
+      border: 1px solid rgba(34,197,94,.22);
+      color: #16a34a;
+    }
+    .withdraw-btn{
+      border: 0;
+      background: #16a34a;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 7px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 10px 18px rgba(22,163,74,.18);
+    }
+    .withdraw-btn:active{ transform: translateY(1px); }
+    .withdraw-btn:hover{ filter: brightness(1.05); }
+
+    .hero-foot{
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 900;
+      opacity: .85;
+      text-align: center;
+    }
+    @media (max-width: 360px){
+      .hero-boneco{ height: 150px; left: 6px; top: -10px; }
+      .hero-inner{ padding-left: 118px; }
+    }
+
+    /* Banner */
+    .banner{
+      margin-top: 14px;
+      border-radius: 24px;
+      background:#fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .banner-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, #eaf1ff 0%, #ffffff 60%);
+    }
+    .banner h3{
+      margin:0;
+      font-size: 16px;
+      font-weight: 1000;
+      letter-spacing:.2px;
+    }
+    .banner p{
+      margin: 6px 0 0;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      line-height: 1.25;
+      max-width: 220px;
+    }
+    .banner-art{
+      width: 108px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg,var(--blue1),var(--blue2));
+      box-shadow: 0 18px 34px rgba(44,103,255,.24);
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-weight: 1000;
+      user-select:none;
+    }
+
+    /* pill sincronizar */
+    .sync{
+      margin-top: 12px;
+      border-radius: 14px;
+      background: #ffe9d7;
+      border: 1px solid #ffd1a8;
+      box-shadow: 0 10px 22px rgba(138,75,16,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .sync .text{
+      font-weight: 900;
+      font-size: 12px;
+      color:#8a4b10;
+      line-height: 1.2;
+    }
+    .sync .cta{
+      border: 1px solid #ffc58f;
+      background: #ffdcbc;
+      color:#7a3f0d;
+      font-weight: 1000;
+      padding: 8px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      white-space: nowrap;
+    }
+    .sync .cta:active{transform: translateY(1px)}
+
+    /* headers */
+    .section{ margin-top: 18px; }
+    .section-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .section-header h4{
+      margin:0;
+      font-size: 13px;
+      font-weight: 1000;
+      letter-spacing:.2px;
+    }
+    .link{
+      background: transparent;
+      border: 0;
+      color: var(--blue1);
+      font-weight: 1000;
+      font-size: 12px;
+      cursor:pointer;
+      padding: 0;
+    }
+
+    /* quick */
+    .quick{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .quick-btn{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 12px 24px rgba(15,23,42,.06);
+      padding: 12px 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      align-items:flex-start;
+      cursor:pointer;
+      user-select:none;
+    }
+    .qicon{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-weight: 1000;
+    }
+    .quick-btn strong{
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing:.2px;
+      color:#22314a;
+    }
+    .q1{background: linear-gradient(135deg,#2c67ff,#6cb2ff);}
+    .q2{background: linear-gradient(135deg,#f59e0b,#fbbf24);}
+    .q3{background: linear-gradient(135deg,#22c55e,#34d399);}
+
+    /* hot cards */
+    .hot{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 12px 24px rgba(15,23,42,.06);
+      padding: 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 9px;
+      min-width:0;
+    }
+    .thumb{
+      height: 74px;
+      border-radius: 14px;
+      border: 1px solid rgba(230,237,247,.9);
+      background: radial-gradient(circle at 30% 25%, #dbeafe 0%, #ffffff 60%);
+      display:grid;
+      place-items:center;
+      font-size: 26px;
+      user-select:none;
+    }
+    .card .title{
+      margin:0;
+      font-size: 11.5px;
+      font-weight: 1000;
+      line-height: 1.15;
+      color:#1c2940;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .meta{
+      display:flex;
+      justify-content:space-between;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+    .buy{
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background:#f6faff;
+      color: var(--blue1);
+      font-weight: 1000;
+      font-size: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+    .buy:active{transform: translateY(1px)}
+
+    /* Meu resumo */
+    .summary{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow2);
+      padding: 14px;
+    }
+    .summary .rowTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .summary h5{
+      margin:0;
+      font-size: 12px;
+      font-weight: 1000;
+      color:#1c2940;
+    }
+    .badge{
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: #f6faff;
+      display:grid;
+      place-items:center;
+      color: var(--blue1);
+      font-weight: 1000;
+      user-select:none;
+    }
+    .barWrap{
+      background:#edf4ff;
+      border:1px solid #dbeafe;
+      border-radius: 999px;
+      height: 12px;
+      overflow:hidden;
+    }
+    .bar{
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg,var(--blue1),var(--blue2));
+      transition: width .5s ease;
+    }
+    .summary .row{
+      margin-top: 10px;
+      display:flex;
+      justify-content:space-between;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+    .summary .row strong{ color:#18243a; }
+
+    /* bottom nav */
+    .bottom{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 10px;
+      width: min(420px, calc(100vw - 20px));
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 22px 44px rgba(15,23,42,.16);
+      padding: 10px 10px;
+      z-index: 60;
+      display:flex;
+      justify-content:space-around;
+      gap: 8px;
+    }
+    .nav{
+      width: 74px;
+      border-radius: 16px;
+      padding: 8px 6px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 6px;
+      cursor:pointer;
+      user-select:none;
+      color: var(--muted);
+      font-weight: 1000;
+      font-size: 10px;
+      border: 1px solid transparent;
+    }
+    .nav svg{ width: 22px; height: 22px; }
+    .nav.active{
+      background:#edf4ff;
+      color: var(--blue1);
+      border-color: #dbeafe;
+    }
+
+    /* pages (SPA) */
+    .page{ display:none; }
+    .page.active{ display:block; }
+
+    /* modal + toast */
+    .overlay{
+      position: fixed;
+      inset:0;
+      background: rgba(2,6,23,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 80;
+      padding: 16px;
+    }
+    .overlay.show{ display:flex; }
+    .modal{
+      width: min(420px, 100%);
+      background:#fff;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .modal h3{ margin:0 0 6px; font-size: 14px; font-weight: 1000; }
+    .modal p{ margin:0 0 12px; font-size: 12px; font-weight: 800; color: var(--muted); line-height: 1.3;}
+    .modal .actions{
+      display:flex;
+      gap: 10px;
+      justify-content:flex-end;
+    }
+    .btn{
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 1000;
+      cursor:pointer;
+      border: 1px solid var(--line);
+      background:#fff;
+      color:#1c2940;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg,var(--blue1),var(--blue2));
+      border-color: transparent;
+      color:#fff;
+      box-shadow: 0 16px 30px rgba(44,103,255,.22);
+    }
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 92px;
+      width: min(420px, calc(100vw - 20px));
+      background: #0b1220;
+      color:#fff;
+      border-radius: 16px;
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      display:none;
+      z-index: 90;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+    .toast.show{ display:block; }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-row">
+        <button class="icon-btn" id="btnMenu" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 7h14M5 12h14M5 17h14" stroke="#0b1220" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="brand" aria-label="Logo">
+          <div class="logo">
+            <img src="img/imgrb.png" alt="Roblax Vault" />
+          </div>
+          <div class="name">
+            <small>Roblax</small>
+            <strong>Vault</strong>
+          </div>
+        </div>
+
+        <button class="icon-btn" id="btnSearch" aria-label="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#0b1220" stroke-width="2"/>
+            <path d="M16.5 16.5 21 21" stroke="#0b1220" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGES (SPA) -->
+    <main class="content">
+
+      <!-- HOME -->
+      <section class="page active" id="page-home">
+        <!-- HERO -->
+        <section class="hero" aria-label="Resumo">
+          <img class="hero-boneco" src="img/personagemroblox.png" alt="" />
+          <div class="hero-inner">
+            <div class="hero-top">
+              <div class="hero-title">
+                <div class="vault">Vault</div>
+                <small>Bem vindo de volta,</small>
+                <strong id="userName">XCXCX</strong>
+              </div>
+            </div>
+
+            <div class="hero-grid">
+              <!-- MINI: Saldo Robux -->
+              <div class="mini">
+                <div class="mini-head">
+                  <div class="mini-icon mini-icon--blue" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="8" cy="8" r="6"></circle>
+                      <path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path>
+                      <path d="M7 6h1v4"></path>
+                      <path d="m16.71 13.88.7.71-2.82 2.82"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mini-label">Saldo Robux</div>
+                <div class="value" id="saldoMoeda">0</div>
+              </div>
+
+              <!-- MINI: Saldo Real -->
+              <div class="mini">
+                <div class="mini-head">
+                  <div class="mini-icon mini-icon--green" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" x2="12" y1="2" y2="22"></line>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                  </div>
+                  <button class="withdraw-btn" type="button" id="btnSacar">Sacar</button>
+                </div>
+                <div class="mini-label">Saldo Real</div>
+                <div class="value" id="saldoReal">R$ 0,00</div>
+              </div>
+            </div>
+
+            <div class="hero-foot">Logado como <span id="userTag">xcxcx</span></div>
+          </div>
+        </section>
+
+        <!-- BANNER -->
+        <section class="banner" aria-label="Banner">
+          <div class="banner-inner">
+            <div>
+              <h3>IM Wallet+</h3>
+              <p>Um lugar onde você compra e vende de forma fácil</p>
+            </div>
+            <div class="banner-art">IM</div>
+          </div>
+        </section>
+
+        <!-- SYNC -->
+        <div class="sync" aria-label="Sincronização">
+          <div class="text">🟠 Sincronize sua conta para trazer seus itens!</div>
+          <button class="cta" id="btnSync">Sincronizar</button>
+        </div>
+
+        <!-- QUICK ACCESS -->
+        <section class="section" aria-label="Acesso rápido">
+          <div class="section-header">
+            <h4>⚡ Acesso Rápido</h4>
+          </div>
+          <div class="quick">
+            <div class="quick-btn" data-go="store">
+              <div class="qicon q1">🛒</div>
+              <strong>Loja</strong>
+            </div>
+            <div class="quick-btn" data-go="store">
+              <div class="qicon q2">🪙</div>
+              <strong>Moeda</strong>
+            </div>
+            <div class="quick-btn" data-go="profile">
+              <div class="qicon q3">👛</div>
+              <strong>Carteira</strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- HOT -->
+        <section class="section" aria-label="Em Alta">
+          <div class="section-header">
+            <h4>🔥 Em Alta</h4>
+            <button class="link" id="btnSeeAll">Ver tudo →</button>
+          </div>
+          <div class="hot" id="hotList"></div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="section" aria-label="Meu resumo">
+          <div class="section-header">
+            <h4>Meu Resumo</h4>
+          </div>
+          <div class="summary">
+            <div class="rowTop">
+              <h5>Performance de Vendas</h5>
+              <div class="badge">%</div>
+            </div>
+            <div class="barWrap" aria-label="Progresso">
+              <div class="bar" id="bar"></div>
+            </div>
+            <div class="row">
+              <span><strong id="pct">0%</strong> taxa de vendas</span>
+              <span>Últimos 7 dias</span>
+            </div>
+            <div class="row">
+              <span>Ativos: <strong id="ativos">0</strong></span>
+              <span>Vendas: <strong id="vendas">0</strong></span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- LOGIN -->
+      <section class="page" id="page-login">
+        <section class="banner" aria-label="Login">
+          <div class="banner-inner">
+            <div>
+              <h3>Login</h3>
+              <p>Entre para sincronizar e ver seus dados.</p>
+            </div>
+            <div class="banner-art">🔐</div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="summary">
+            <h5 style="margin:0 0 10px; font-size:13px; font-weight:1000;">Acesso rápido</h5>
+            <button class="btn primary" style="width:100%;" id="btnLoginFake">Entrar (demo)</button>
+            <p style="margin:10px 0 0; font-size:12px; font-weight:800; color:var(--muted);">
+              * Isso é um login simulado só para testar o fluxo.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <!-- STORE -->
+      <section class="page" id="page-store">
+        <section class="banner" aria-label="Loja">
+          <div class="banner-inner">
+            <div>
+              <h3>Loja</h3>
+              <p>Itens e ofertas em destaque.</p>
+            </div>
+            <div class="banner-art">🛒</div>
+          </div>
+        </section>
+        <section class="section" aria-label="Lista de itens">
+          <div class="section-header">
+            <h4>🔥 Em Alta</h4>
+          </div>
+          <div class="hot" id="storeList"></div>
+        </section>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="page" id="page-profile">
+        <section class="banner" aria-label="Perfil">
+          <div class="banner-inner">
+            <div>
+              <h3>Perfil</h3>
+              <p>Carteira, saldo e configurações.</p>
+            </div>
+            <div class="banner-art">👤</div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="summary">
+            <div class="row" style="margin-top:0">
+              <span>Usuário</span>
+              <span><strong id="profileUser">XCXCX</strong></span>
+            </div>
+            <div class="row">
+              <span>Saldo Moeda</span>
+              <span><strong id="profileMoeda">0</strong></span>
+            </div>
+            <div class="row">
+              <span>Saldo Real</span>
+              <span><strong id="profileReal">R$ 0,00</strong></span>
+            </div>
+            <div style="height:10px"></div>
+            <button class="btn" style="width:100%;" id="btnLogout">Sair (demo)</button>
+          </div>
+        </section>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom" aria-label="Navegação inferior">
+    <div class="nav active" data-page="home" title="Início">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-9.5Z"
+          stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      Início
+    </div>
+    <div class="nav" data-page="login" title="Login">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M10 17l5-5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M21 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Login
+    </div>
+    <div class="nav" data-page="store" title="Loja">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 8h15l-1.5 12H7.5L6 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9 8a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Loja
+    </div>
+    <div class="nav" data-page="profile" title="Perfil">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Perfil
+    </div>
+  </nav>
+
+  <!-- MODAL -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Sincronizar">
+    <div class="modal">
+      <h3>Sincronizar conta</h3>
+      <p>Conectar para importar seus itens e atualizar os saldos. (Fluxo demo)</p>
+      <div class="actions">
+        <button class="btn" id="btnCancel">Cancelar</button>
+        <button class="btn primary" id="btnConnect">Conectar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">OK</div>
+
+  <script>
+    /* ====== STATE (demo) ====== */
+    const state = {
+      user: "XCXCX",
+      synced: false,
+      saldoMoeda: 0,
+      saldoReal: 0,
+      vendasPct: 0,
+      ativos: 0,
+      vendas: 0,
+      hot: [
+        { id: 1, icon: "🛡️", name: "Valkyrie", price: 2500, trend: "+12%" },
+        { id: 2, icon: "📦", name: 'Documentos "Top Secret"', price: 5025, trend: "+8%" },
+        { id: 3, icon: "🪝", name: "Chifres de ...", price: 4449, trend: "+5%" }
+      ]
+    };
+
+    /* ====== HELPERS ====== */
+    const $ = (q) => document.querySelector(q);
+    const $$ = (q) => document.querySelectorAll(q);
+    function brl(n){
+      return n.toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+    }
+    let toastTimer = null;
+    function toast(msg){
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> t.classList.remove("show"), 2200);
+    }
+    function openModal(){ $("#overlay").classList.add("show"); }
+    function closeModal(){ $("#overlay").classList.remove("show"); }
+
+    /* ====== RENDER ====== */
+    function render(){
+      $("#userName").textContent = state.user;
+      $("#userTag").textContent = state.user; /* FIX: antes ficava fixo */
+      $("#saldoMoeda").textContent = state.saldoMoeda.toLocaleString("pt-BR");
+      $("#saldoReal").textContent = brl(state.saldoReal);
+      $("#pct").textContent = `${state.vendasPct}%`;
+      $("#bar").style.width = `${state.vendasPct}%`;
+      $("#ativos").textContent = state.ativos;
+      $("#vendas").textContent = state.vendas;
+
+      $("#profileUser").textContent = state.user;
+      $("#profileMoeda").textContent = state.saldoMoeda.toLocaleString("pt-BR");
+      $("#profileReal").textContent = brl(state.saldoReal);
+
+      // Home hot list
+      const hotList = $("#hotList");
+      hotList.innerHTML = state.hot.map(item => `
+        <article class="card" data-id="${item.id}">
+          <div class="thumb" title="${item.name}">${item.icon}</div>
+          <p class="title">${item.name}</p>
+          <div class="meta">
+            <span>💎 ${item.price.toLocaleString("pt-BR")}</span>
+            <span>${item.trend}</span>
+          </div>
+          <button class="buy" type="button" data-buy="${item.id}">Comprar</button>
+        </article>
+      `).join("");
+
+      // Store list
+      const storeList = $("#storeList");
+      storeList.innerHTML = state.hot.map(item => `
+        <article class="card" data-id="${item.id}">
+          <div class="thumb">${item.icon}</div>
+          <p class="title">${item.name}</p>
+          <div class="meta">
+            <span>💎 ${item.price.toLocaleString("pt-BR")}</span>
+            <span>${item.trend}</span>
+          </div>
+          <button class="buy" type="button" data-buy="${item.id}">Comprar</button>
+        </article>
+      `).join("");
+    }
+
+    /* ====== ROUTER ====== */
+    function go(page){
+      $$(".page").forEach(p => p.classList.remove("active"));
+      $("#page-" + page).classList.add("active");
+
+      $$(".nav").forEach(n => n.classList.remove("active"));
+      document.querySelector(`.nav[data-page="${page}"]`).classList.add("active");
+
+      document.title = `Roblax Vault • ${page.charAt(0).toUpperCase() + page.slice(1)}`;
+    }
+
+    /* ====== EVENTS ====== */
+    $$(".nav").forEach(n => n.addEventListener("click", () => go(n.dataset.page)));
+    $$(".quick-btn").forEach(q => q.addEventListener("click", () => go(q.dataset.go)));
+
+    $("#btnMenu").addEventListener("click", () => toast("Menu (demo)"));
+    $("#btnSearch").addEventListener("click", () => toast("Buscar (demo)"));
+
+    $("#btnSync").addEventListener("click", openModal);
+    $("#btnCancel").addEventListener("click", closeModal);
+    $("#overlay").addEventListener("click", (e)=> { if(e.target.id === "overlay") closeModal(); });
+
+    $("#btnConnect").addEventListener("click", ()=>{
+      closeModal();
+      state.synced = true;
+      state.saldoMoeda = 1250;
+      state.saldoReal = 0;
+      state.vendasPct = 0;
+      state.ativos = 3;
+      state.vendas = 0;
+      render();
+      toast("Conta sincronizada! Itens importados (demo).");
+      go("home");
+    });
+
+    $("#btnSeeAll").addEventListener("click", ()=>{
+      go("store");
+      toast("Mostrando todos os itens em alta.");
+    });
+
+    document.addEventListener("click", (e)=>{
+      const buy = e.target.closest("[data-buy]");
+      if(buy){
+        const id = Number(buy.dataset.buy);
+        const item = state.hot.find(x => x.id === id);
+        if(!item) return;
+
+        if(state.saldoMoeda >= item.price){
+          state.saldoMoeda -= item.price;
+          toast(`Comprado: ${item.name}`);
+        } else {
+          toast(`Saldo insuficiente para ${item.name}`);
+        }
+        render();
+        return;
+      }
+
+      const card = e.target.closest(".card[data-id]");
+      if(card && !e.target.closest("button")){
+        const id = Number(card.dataset.id);
+        const item = state.hot.find(x => x.id === id);
+        if(item) toast(`Detalhe (demo): ${item.name}`);
+      }
+    });
+
+    $("#btnLoginFake").addEventListener("click", ()=>{
+      state.user = "XCXCX";
+      toast("Login OK (demo).");
+      go("home");
+      render();
+    });
+
+    $("#btnLogout").addEventListener("click", ()=>{
+      state.synced = false;
+      state.user = "XCXCX";
+      state.saldoMoeda = 0;
+      state.saldoReal = 0;
+      state.vendasPct = 0;
+      state.ativos = 0;
+      state.vendas = 0;
+      render();
+      toast("Você saiu (demo).");
+      go("login");
+    });
+
+    /* INIT */
+    render();
+    go("home");
+
+    function abrirTelaLicenca(){
+      window.location.href = "licenca.html";
+    }
+    const btnSacar = document.getElementById("btnSacar");
+    if(btnSacar){
+      btnSacar.addEventListener("click", abrirTelaLicenca);
+    }
+    const btnSalvar = document.getElementById("btnSalvar");
+    if(btnSalvar){
+      btnSalvar.addEventListener("click", abrirTelaLicenca);
+    }
+  </script>
+</body>
+</html>
